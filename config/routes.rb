@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+
+  # this defines a route that specifies if we get a request the has a GET HTTP
+  # verb with `/about` url, use the HomeController with about action (method)
+  get "/about" => "home#about"
+
+  # passing the `as:` option enables us to have a url/path helper for this route
+  # note that helpers are only for the URL portion of the route and has nothing
+  # to do with the HTTP Verb. Also, note that a URL helper must be unique
+  get "/greet/:name" => "home#greet", as: :greet
+
+  get  "/cowsay" => "cowsay#index"
+  post "/cowsay" => "cowsay#create", as: :cowsay_submit
+
+  get  "/temp_converter" => "temp_converter#index"
+  post "/temp_converter" => "temp_converter#create"
+
+  # get({"/"      => "home#index"})
+  root "home#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -7,6 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= link_to "Home", root_path %>
+  |
+  <!-- <a href="<%= about_path %>">About Us</a>
+  |
+  <a href="<%= about_url %>">About Us</a> -->
+  <%# link_to is a helper method that is built-in with Rails %>
+  <%= link_to("About Us", about_path, {class: "abc", id: "xyz"}) %>
+  |
+  <a href="<%= greet_path({name: "John"}) %>">Greet John</a>
+  |
+  <a href="<%= greet_path("Tam") %>">Greet Tam</a>
+  |
+  <%= link_to "Cowsay", cowsay_path %>
+  |
+  <%= link_to "Temperature", temp_converter_path %>
+  <hr>
 
 <%= yield %>
 
