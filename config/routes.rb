@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :questions
+  # get    "/questions/new"      => "questions#new",    as: :new_question
+  # post   "/questions"          => "questions#create", as: :questions
+  # get    "/questions/:id"      => "questions#show",   as: :question
+  # get    "/questions"          => "questions#index"
+  # get    "/questions/:id/edit" => "questions#edit",   as: :edit_question
+  # patch  "/questions/:id"      => "questions#update"
+  # delete "/questions/:id"      => "questions#destroy"
+
   # this defines a route that specifies if we get a request the has a GET HTTP
   # verb with `/about` url, use the HomeController with about action (method)
   get "/about" => "home#about"
