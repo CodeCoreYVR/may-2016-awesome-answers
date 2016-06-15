@@ -32,12 +32,12 @@ class Question < ActiveRecord::Base
   private
 
   def cap_title
-    self.title = title.capitalize
+    self.title = title.capitalize if title
   end
 
   def squeeze_title_and_body
-    self.title.squeeze!(" ")
-    self.body.squeeze!(" ")
+    self.title.squeeze!(" ") if title
+    self.body.squeeze!(" ") if body
   end
 
   def set_defaults
@@ -51,7 +51,7 @@ class Question < ActiveRecord::Base
   end
 
   def no_title_in_body
-    if body.include?(title)
+    if body && body.include?(title)
       errors.add(:body, "No title in my body please!")
     end
   end
