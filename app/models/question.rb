@@ -1,4 +1,13 @@
 class Question < ActiveRecord::Base
+  # has_many helps us set up the association between question model and the
+  # answer model. In this case `has_many` assumes that the answers table contain
+  # a field named `question_id` that is an integer (this is a Rails convention).
+  # the dependent option takes valus like `destroy` and `nullify`
+  # `destroy` will make Rails automatically delete associated answers before
+  # deleting the question.
+  # `nullify` will make Rails turn `question_id` values of associated records
+  # to `NULL` before deleting the question.
+  has_many :answers, dependent: :destroy
 
   validates(:title, {presence: {message: "must be present!"}, uniqueness: true})
 
@@ -27,6 +36,10 @@ class Question < ActiveRecord::Base
   # scope :search, lambda {|word| where("title ILIKE ? OR body ILIKE ?", "%#{word}%", "%#{word}%")}
   def self.search(word)
     where("title ILIKE :word OR body ILIKE :word", {word: "%#{word}%"})
+  end
+
+  def new_first_answers
+    answers.order(created_at: :desc)
   end
 
   private

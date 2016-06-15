@@ -21,6 +21,7 @@ class QuestionsController < ApplicationController
     # @question.view_count += 1
     # @question.save
     @question.increment!(:view_count)
+    @answer = Answer.new
   end
 
   def index

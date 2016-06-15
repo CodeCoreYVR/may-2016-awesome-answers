@@ -1,6 +1,23 @@
 Rails.application.routes.draw do
 
-  resources :questions
+  resources :questions do
+    # this will define a route that will be `/questions/search` and it will
+    # point to the questions controller `search` action in that controller.
+    # on: :collection makes the route not have an `id` or `question_id` on it
+    get :search, on: :collection
+
+    # this will generate a route `/questions/:id/flag` and it will point to
+    # questions controller `flag` action.
+    # on: :member makes the route include an `:id` in it similar to the `edit`
+    post :flag, on: :member
+
+    post :mark_done
+
+    # will will make all the answers routes nested within `questions` which
+    # means all the answers routes will be prepended with `/questions/:question_id`
+    resources :answers, only: [:create, :destroy]
+
+  end
   # get    "/questions/new"      => "questions#new",    as: :new_question
   # post   "/questions"          => "questions#create", as: :questions
   # get    "/questions/:id"      => "questions#show",   as: :question
