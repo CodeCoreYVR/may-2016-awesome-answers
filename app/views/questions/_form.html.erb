@@ -19,5 +19,8 @@ form_for will also prepopulate the fields with the data fetched from the databas
     <%= f.label :body %>
     <%= f.text_area :body %>
   </div>
+  <div>
+    <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
+  </div>
   <%= f.submit %>
 <% end %>

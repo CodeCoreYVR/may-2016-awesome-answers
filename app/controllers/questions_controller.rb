@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
     # In the line below we're using the `strong parameters` feature of Rails
     # In the line we're `requiring` that the `params` hash has a key called
     # question and we're only allowing the `title` and `body` by fetched
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, :category_id)
   end
 
   def find_question

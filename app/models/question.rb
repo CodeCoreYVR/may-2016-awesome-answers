@@ -8,6 +8,7 @@ class Question < ActiveRecord::Base
   # `nullify` will make Rails turn `question_id` values of associated records
   # to `NULL` before deleting the question.
   has_many :answers, dependent: :destroy
+  belongs_to :category
 
   validates(:title, {presence: {message: "must be present!"}, uniqueness: true})
 
