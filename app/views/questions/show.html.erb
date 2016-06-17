@@ -1,11 +1,15 @@
+<%#= debug current_user %>
 <h1><%= @question.title.titleize %></h1>
 <p><%= @question.body %></p>
 <p>Views: <%= @question.view_count %></p>
 <p>Created By: <%= @question.user.full_name if @question.user %></p>
-<%= link_to "Edit", edit_question_path(@question) %>
-<%= link_to "Delete", question_path(@question),
-                      method: :delete,
-                      data:   {confirm: "Are you sure?"} %>
+
+<% if can? :manage, @question %>
+  <%= link_to "Edit", edit_question_path(@question) %>
+  <%= link_to "Delete", question_path(@question),
+                        method: :delete,
+                        data:   {confirm: "Are you sure?"} %>
+<% end %>
 <%#= form_for @answer, url: question_answers_path(@question) do %>
 <h2>Create an Answer</h2>
 <%= @answer.errors.full_messages.join(", ") %>
