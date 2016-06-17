@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :users, only: [:new, :create]
+  # delete "/sessions" => "sessions#destroy"
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
   resources :questions do
     # this will define a route that will be `/questions/search` and it will
     # point to the questions controller `search` action in that controller.

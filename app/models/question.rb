@@ -9,6 +9,7 @@ class Question < ActiveRecord::Base
   # to `NULL` before deleting the question.
   has_many :answers, dependent: :destroy
   belongs_to :category
+  belongs_to :user
 
   validates(:title, {presence: {message: "must be present!"}, uniqueness: true})
 

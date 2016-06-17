@@ -1,12 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :find_question, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
 
   def new
     @question = Question.new
   end
 
   def create
-    @question        = Question.new question_params
+    @question      = Question.new question_params
+    @question.user = current_user
     if @question.save
       # redirect_to question_path({id: @question.id})
       # render :show
@@ -55,6 +57,10 @@ class QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find params[:id]
+  end
+
+  def authenticate_user!
+    redirect_to new_session_path, alert: "please sign in" unless user_signed_in?
   end
 
 end
