@@ -16,6 +16,36 @@
               class: "like-icon" %>
 <% end %>
 
+<% if @question.voted_up_by?(current_user) %>
+  <%= link_to "Undo Vote Up",
+              question_vote_path(@question, current_user_vote),
+              method: :delete,
+              data: {disable_with: "...."} %>
+  <%= link_to "Vote Down",
+               question_vote_path(@question,
+                                  current_user_vote,
+                                  {vote: {is_up: false}}),
+               method: :patch %>
+<% elsif @question.voted_down_by?(current_user) %>
+  <%= link_to "Vote Up",
+              question_vote_path(@question,
+                                 current_user_vote,
+                                 {vote: {is_up: true}}),
+              method: :patch %>
+  <%= link_to "Undo Vote Down",
+              question_vote_path(@question, current_user_vote),
+              method: :delete,
+              data: {disable_with: "...."} %>
+<% else  %>
+  <%= link_to "Vote Up",
+              question_votes_path(@question, {vote: {is_up: true}}),
+              method: :post %>
+  |
+  <%= link_to "Vote Down",
+              question_votes_path(@question, {vote: {is_up: false}}),
+              method: :post %>
+<% end %>
+
 <% if can? :manage, @question %>
   <%= link_to "Edit", edit_question_path(@question) %>
   <%= link_to "Delete", question_path(@question),

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :questions do
+    resources :votes, only: [:create, :update, :destroy]
+
     # this will define a route that will be `/questions/search` and it will
     # point to the questions controller `search` action in that controller.
     # on: :collection makes the route not have an `id` or `question_id` on it
