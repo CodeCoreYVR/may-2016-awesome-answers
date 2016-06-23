@@ -22,6 +22,9 @@ class Ability
       q.user == user
     end
 
+    can :destroy, Like do |l|
+      l.user == user
+    end
 
 
     # Define abilities for the passed in user here. For example:

@@ -11,6 +11,9 @@ class Question < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
+  has_many :likes, dependent: :destroy
+  has_many :users, through: :likes
+
   validates(:title, {presence: {message: "must be present!"}, uniqueness: true})
 
   # by having the option: uniqueness: {scope: :title} it ensures that the body
@@ -42,6 +45,15 @@ class Question < ActiveRecord::Base
 
   def new_first_answers
     answers.order(created_at: :desc)
+  end
+
+  def liked_by?(user)
+    # likes.find_by_user_id user
+    likes.exists?(user: user)
+  end
+
+  def like_for(user)
+    likes.find_by_user_id user
   end
 
   private

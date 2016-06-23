@@ -23,7 +23,12 @@ Rails.application.routes.draw do
     # means all the answers routes will be prepended with `/questions/:question_id`
     resources :answers, only: [:create, :destroy]
 
+    resources :likes, only: [:create, :destroy]
+
   end
+
+  resources :likes, only: [:index]
+
   # get    "/questions/new"      => "questions#new",    as: :new_question
   # post   "/questions"          => "questions#create", as: :questions
   # get    "/questions/:id"      => "questions#show",   as: :question
