@@ -3,7 +3,7 @@
 <p><%= @question.body %></p>
 <p>Views: <%= @question.view_count %></p>
 <p>Created By: <%= @question.user.full_name if @question.user %></p>
-
+<p>Tags: <%= @question.tags.map {|t| t.title.capitalize }.join(", ") %></p>
 <% if @question.liked_by?(current_user) %>
   <%= link_to fa_icon("thumbs-up"),
               question_like_path(@question, @question.like_for(current_user)),
@@ -15,12 +15,14 @@
               method: :post,
               class: "like-icon" %>
 <% end %>
+(<%= @question.likes.count %>)
 
 <% if @question.voted_up_by?(current_user) %>
   <%= link_to "Undo Vote Up",
               question_vote_path(@question, current_user_vote),
               method: :delete,
               data: {disable_with: "...."} %>
+ (<%= @question.vote_sum %>)
   <%= link_to "Vote Down",
                question_vote_path(@question,
                                   current_user_vote,
@@ -32,6 +34,7 @@
                                  current_user_vote,
                                  {vote: {is_up: true}}),
               method: :patch %>
+  (<%= @question.vote_sum %>)
   <%= link_to "Undo Vote Down",
               question_vote_path(@question, current_user_vote),
               method: :delete,
@@ -40,7 +43,7 @@
   <%= link_to "Vote Up",
               question_votes_path(@question, {vote: {is_up: true}}),
               method: :post %>
-  |
+  (<%= @question.vote_sum %>)
   <%= link_to "Vote Down",
               question_votes_path(@question, {vote: {is_up: false}}),
               method: :post %>
