@@ -22,6 +22,9 @@ gem 'kaminari'
 
 gem "letter_opener", group: :development
 
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
