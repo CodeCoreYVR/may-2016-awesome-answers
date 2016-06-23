@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
     @question        = Question.find params[:question_id]
     @answer.question = @question
     if @answer.save
+      AnswersMailer.notify_question_owner(@answer).deliver_now
       redirect_to question_path(@question), notice: "Answer created!"
     else
       render "/questions/show"
