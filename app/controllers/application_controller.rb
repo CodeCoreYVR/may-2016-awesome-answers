@@ -27,5 +27,6 @@ class ApplicationController < ActionController::Base
   def current_question
     @current_question ||= Question.find params[:question_id]
   end
+  helper_method :current_question
 
 end
