@@ -114,6 +114,7 @@ GEM
     pg (0.18.4)
     pkg-config (1.1.7)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -211,6 +212,7 @@ DEPENDENCIES
   kaminari
   letter_opener
   pg (~> 0.15)
+  rack-cors
   rails (= 4.2.6)
   rails-erd
   sass-rails (~> 5.0)

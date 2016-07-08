@@ -25,10 +25,19 @@ class QuestionsController < ApplicationController
     # @question.save
     @question.increment!(:view_count)
     @answer = Answer.new
+    respond_to do |format|
+      format.html
+      format.json { render json: {question: @question, answers: @question.answers} }
+    end
   end
 
   def index
-    @questions = Question.order(created_at: :desc).page(params[:page]).per(7)
+    @questions = Question.order(created_at: :desc).page(params[:page]).per(params[:per] || 7)
+    respond_to do |format|
+      format.html
+      format.json { render json: @questions }
+      format.xml  { render xml:  @questions }
+    end
   end
 
   def edit
