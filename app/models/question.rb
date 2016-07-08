@@ -39,6 +39,9 @@ class Question < ActiveRecord::Base
   after_initialize  :set_defaults
   before_validation :cap_title, :squeeze_title_and_body
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders, :history]
+
   # scope :recent, lambda {|count| where("created_at > ?", 3.day.ago).limit(count) }
   def self.recent(count)
     where("created_at > ?", 3.day.ago).limit(count)
@@ -89,6 +92,10 @@ class Question < ActiveRecord::Base
   def vote_sum
     up_votes - down_votes
   end
+
+  # def to_param
+  #   "#{id}-#{title}".parameterize
+  # end
 
   private
 

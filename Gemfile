@@ -42,6 +42,12 @@ gem 'cancancan'
 
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'friendly_id'
+
+gem "bootstrap-sass"
+gem 'simple_form'
+gem "quiet_assets"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

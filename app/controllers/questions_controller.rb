@@ -44,6 +44,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    @question.slug = nil
     if @question.update question_params
       redirect_to question_path(@question), notice: "Question updated"
     else
