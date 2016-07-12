@@ -19,6 +19,7 @@
 
 <%= render "/questions/vote", question: @question %>
 
+<%= image_tag @question.image.url(:medium) %>
 
 <% if can? :manage, @question %>
   <%= link_to "Edit", edit_question_path(@question) %>

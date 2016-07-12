@@ -42,6 +42,8 @@ class Question < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders, :history]
 
+  mount_uploader :image, ImageUploader
+
   # scope :recent, lambda {|count| where("created_at > ?", 3.day.ago).limit(count) }
   def self.recent(count)
     where("created_at > ?", 3.day.ago).limit(count)

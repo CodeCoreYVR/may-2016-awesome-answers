@@ -47,6 +47,9 @@ gem 'friendly_id'
 gem "bootstrap-sass"
 gem 'simple_form'
 gem "quiet_assets"
+gem 'carrierwave'
+gem "mini_magick"
+gem "fog"
 
 # Use Unicorn as the app server
 # gem 'unicorn'

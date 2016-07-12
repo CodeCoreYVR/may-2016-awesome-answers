@@ -13,6 +13,7 @@ form_for will also prepopulate the fields with the data fetched from the databas
 <%= simple_form_for @question do |f| %>
   <%= f.input :title %>
   <%= f.input :body %>
+  <%= f.input :image %>
   <%= f.association :tags, as: :check_boxes %>
   <%= f.association :category, include_blank: false %>
   <%= f.button :submit, class: "btn-primary" %>
