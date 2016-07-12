@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   # will point to the api/v1/questions_controller.rb
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :questions, only: [:index, :show]
+      resources :questions, only: [:index, :show] do
+        resources :answers, only: [:create]
+      end
     end
   end
 

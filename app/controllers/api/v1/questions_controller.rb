@@ -1,5 +1,7 @@
-class Api::V1::QuestionsController < ApplicationController
+class Api::V1::QuestionsController < Api::BaseController
   DEFAULT_PER_PAGE = 7
+  skip_before_action :authenticate_api_user
+
   def index
     @questions = Question.order(created_at: :desc).page(params[:page]).per(params[:per] || DEFAULT_PER_PAGE)
   end

@@ -21,8 +21,22 @@ class User < ActiveRecord::Base
                     uniqueness: true,
                     format: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
+  before_create :generate_api_key
+
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def generate_api_key
+    # begin
+    #   self.api_key = SecureRandom.urlsafe_base64
+    # end while User.exists?(api_key: api_key)
+    loop do
+      self.api_key = SecureRandom.urlsafe_base64
+      break unless User.exists?(api_key: api_key)
+    end
   end
 
 end
