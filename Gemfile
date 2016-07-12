@@ -25,6 +25,7 @@ gem "letter_opener", group: :development
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
 
+gem 'active_model_serializers'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

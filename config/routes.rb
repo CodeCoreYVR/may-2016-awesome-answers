@@ -8,6 +8,25 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
+  # "/api/v1/questions" -> index
+  # get "/api/v1/questions" => "api/v1/questions#index"
+
+  # this will prepend all the urls for the questions with /api/v1 but it
+  # will still point to the questions_controller.rb
+  # scope :api do
+  #   scope :v1 do
+  #     resources :questions, only: [:index, :show]
+  #   end
+  # end
+
+  # this will prepend all the urls for the questions with /api/v1 and it
+  # will point to the api/v1/questions_controller.rb
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :questions, only: [:index, :show]
+    end
+  end
+
   resources :questions do
     resources :votes, only: [:create, :update, :destroy]
 
