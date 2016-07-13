@@ -16,5 +16,8 @@ form_for will also prepopulate the fields with the data fetched from the databas
   <%= f.input :image %>
   <%= f.association :tags, as: :check_boxes %>
   <%= f.association :category, include_blank: false %>
+  <% if current_user.using_twitter? && !@question.persisted? %>
+    <%= f.input :tweet_it, as: :boolean %>
+  <% end %>
   <%= f.button :submit, class: "btn-primary" %>
 <% end %>

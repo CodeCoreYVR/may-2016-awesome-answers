@@ -11,8 +11,15 @@ class QuestionsController < ApplicationController
     @question      = Question.new question_params
     @question.user = current_user
     if @question.save
-      # redirect_to question_path({id: @question.id})
-      # render :show
+      if @question.tweet_it
+        client = Twitter::REST::Client.new do |config|
+          config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+          config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+          config.access_token        = current_user.twitter_token
+          config.access_token_secret = current_user.twitter_secret
+        end
+        client.update "#Question: #{@question.title} #{question_url(@question)}"
+      end
       redirect_to question_path(@question), notice: "Question created!"
     else
       flash[:alert] = "Question not created!"
@@ -63,7 +70,12 @@ class QuestionsController < ApplicationController
     # In the line below we're using the `strong parameters` feature of Rails
     # In the line we're `requiring` that the `params` hash has a key called
     # question and we're only allowing the `title` and `body` by fetched
-    params.require(:question).permit(:title, :body, :category_id, :image, {tag_ids: []})
+    params.require(:question).permit(:title,
+                                     :tweet_it,
+                                     :body,
+                                     :category_id,
+                                     :image,
+                                     {tag_ids: []})
   end
 
   def find_question

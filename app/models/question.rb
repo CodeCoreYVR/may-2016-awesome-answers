@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  attr_accessor :tweet_it
+
   # has_many helps us set up the association between question model and the
   # answer model. In this case `has_many` assumes that the answers table contain
   # a field named `question_id` that is an integer (this is a Rails convention).
