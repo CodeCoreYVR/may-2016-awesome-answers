@@ -51,6 +51,8 @@ gem 'carrierwave'
 gem "mini_magick"
 gem "fog"
 
+gem "react-rails"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
