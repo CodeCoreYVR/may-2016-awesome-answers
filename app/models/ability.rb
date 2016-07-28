@@ -9,6 +9,7 @@ class Ability
     # if `current_user` is not nil then it will use it, otherwise, `user` object
     # will be set to a new `User`
     user ||= User.new
+
     if user.is_admin?
       # this means that is a user has the `is_admin` field set to `true` that
       # user will be able to manage all the models we have.

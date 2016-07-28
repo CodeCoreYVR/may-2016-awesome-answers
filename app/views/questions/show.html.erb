@@ -1,19 +1,12 @@
-<%#= debug current_user %>
-<h1><%= @question.title.titleize %></h1>
+<h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
 <p>Views: <%= @question.view_count %></p>
-<p>Created By: <%= @question.user.full_name if @question.user %></p>
-<p>Tags: <%= @question.tags.map {|t| t.title.capitalize }.join(", ") %></p>
+<p>Created By: <%= @question.user_name %></p>
+<p>Tags: <%= @question.tag_display %></p>
 <% if @question.liked_by?(current_user) %>
-  <%= link_to fa_icon("thumbs-up"),
-              question_like_path(@question, @question.like_for(current_user)),
-              method: :delete,
-              class: "like-icon" %>
+  <%= @question.thumbs_up_button %>
 <% else %>
-  <%= link_to fa_icon("thumbs-o-up"),
-              question_likes_path(@question),
-              method: :post,
-              class: "like-icon" %>
+  <%= @question.thumbs_down_button %>
 <% end %>
 (<%= @question.likes.count %>)
 

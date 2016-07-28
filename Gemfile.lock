@@ -97,6 +97,11 @@ GEM
       sinatra (>= 1.4.4)
     domain_name (0.5.20160615)
       unf (>= 0.0.5, < 1.0.0)
+    draper (2.1.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     equalizer (0.0.10)
     erubis (2.7.0)
     excon (0.49.0)
@@ -355,6 +360,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    request_store (1.3.0)
     ruby-graphviz (1.2.2)
     sass (3.4.22)
     sass-rails (5.0.4)
@@ -430,6 +436,7 @@ DEPENDENCIES
   cowsay
   delayed_job_active_record
   delayed_job_web
+  draper
   faker!
   fog
   font-awesome-rails
